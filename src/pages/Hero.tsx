@@ -27,7 +27,7 @@ export default function Hero() {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = 'http://127.0.0.1:3000/auth/login';
+    window.location.href = `${import.meta.env.VITE_API_URL || 'http://127.0.0.1:3000'}/auth/login`;
   };
 
   return (
