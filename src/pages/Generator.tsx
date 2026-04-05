@@ -137,7 +137,7 @@ export default function Generator() {
                   {/* User Profile */}
                   {userProfile && (
                     <div className="absolute bottom-6 right-6 flex items-center space-x-1.5 opacity-60 z-20">
-                      <span className="text-[8px] font-bold text-white uppercase tracking-widest mt-0.5 mr-1 drop-shadow-sm">Made with <span className="text-red-400 opacity-80 mx-0.5 animate-pulse">♥</span> for</span>
+                      <span className="text-[8px] font-bold text-white uppercase tracking-widest mt-0.5 mr-1 drop-shadow-sm">Made with 💖 for</span>
                       <span className="text-[9px] font-black text-white uppercase tracking-widest leading-none mt-0.5 drop-shadow-sm">{userProfile.name}</span>
                       {userProfile.image ? (
                         <img src={userProfile.image} alt={userProfile.name} className="w-4 h-4 rounded-full object-cover" />
