@@ -1,9 +1,15 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate, useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useSearchParams, Navigate } from 'react-router-dom';
+import { useEffect, type ReactNode } from 'react';
 import { Layout } from './components/Layout';
+import { Footer } from './components/Footer';
 import Hero from './pages/Hero';
 import Dashboard from './pages/Dashboard';
 import Generator from './pages/Generator';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+
+// Helper to check if user is authenticated
+const isAuthenticated = () => !!localStorage.getItem('spotify_access');
 
 function AuthHandler() {
   const [searchParams] = useSearchParams();
@@ -40,17 +46,80 @@ function AuthHandler() {
   return null;
 }
 
+function ProtectedRoute({ children }: { children: ReactNode }) {
+  if (!isAuthenticated()) {
+    return <Navigate to="/" replace />;
+  }
+  return <>{children}</>;
+}
+
+function PublicRoute({ children }: { children: ReactNode }) {
+  // If already logged in and visiting landing, redirect to dashboard
+  if (isAuthenticated() && window.location.pathname === '/') {
+    return <Navigate to="/dashboard" replace />;
+  }
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <Router>
-      <Layout>
-        <AuthHandler />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/generate" element={<Generator />} />
-        </Routes>
-      </Layout>
+      <AuthHandler />
+      <Routes>
+        {/* Landing & Legal Pages - Includes Footer */}
+        <Route 
+          path="/" 
+          element={
+            <PublicRoute>
+              <Hero />
+              <Footer />
+            </PublicRoute>
+          } 
+        />
+        <Route 
+          path="/terms" 
+          element={
+            <>
+              <Terms />
+              <Footer />
+            </>
+          } 
+        />
+        <Route 
+          path="/privacy" 
+          element={
+            <>
+              <Privacy />
+              <Footer />
+            </>
+          } 
+        />
+
+        {/* App Shell - Protected pages (No Footer) */}
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/generate" 
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Generator />
+              </Layout>
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* Catch all - redirect to landing */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </Router>
   );
 }

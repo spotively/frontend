@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /$
+Disallow: /dashboard
+Disallow: /generate
+Disallow: /auth
+
+Sitemap: https://spotively.app/sitemap.xml

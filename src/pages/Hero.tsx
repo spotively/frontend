@@ -5,7 +5,7 @@ export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -31,24 +31,27 @@ export default function Hero() {
   };
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center justify-center min-h-screen text-center px-4 relative overflow-hidden">
-      {/* Background Pastel Spot */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F4CCCC]/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div ref={containerRef} className="flex flex-col items-center justify-center min-h-screen text-center px-4 relative overflow-hidden bg-brand-cream">
+      {/* Background Pastel Spots */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-teal/20 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-lavender/30 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse transition-all delay-700"></div>
       
-      <h1 ref={titleRef} className="text-6xl md:text-[8rem] font-sans font-black tracking-tighter mb-6 text-black uppercase leading-[0.9]">
-        Spotively
-      </h1>
-      <p ref={subtitleRef} className="text-lg md:text-2xl text-gray-500 mb-16 max-w-2xl font-medium">
-        A minimalist aesthetic visualization of your top music.
-        Relive the vibe that made your period.
-      </p>
-      <button
-        ref={buttonRef as any}
-        onClick={handleLogin}
-        className="px-12 py-5 bg-black text-white rounded-full font-black uppercase tracking-widest text-sm shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-all hover:scale-105 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] active:scale-95"
-      >
-        Connect Spotify
-      </button>
+      <div className="z-10 flex flex-col items-center">
+        <h1 ref={titleRef} className="text-6xl md:text-[8rem] font-sans font-black tracking-tighter mb-6 text-[#2D2A2A] uppercase leading-[0.9]">
+          Spotively
+        </h1>
+        <p ref={subtitleRef} className="text-lg md:text-2xl text-[#2D2A2A]/60 mb-16 max-w-2xl font-medium">
+          A minimalist aesthetic visualization of your top music.
+          Relive the vibe that made your period.
+        </p>
+        <button
+          ref={buttonRef}
+          onClick={handleLogin}
+          className="px-12 py-5 glass-button rounded-full font-black uppercase tracking-widest text-sm text-[#2D2A2A] cute-shadow transition-all hover:scale-105 active:scale-95 border-brand-lavender/20"
+        >
+          Connect Spotify
+        </button>
+      </div>
     </div>
   );
 }

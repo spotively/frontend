@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-cream: #F2EAE0;
+  --color-brand-teal: #B4D3D9;
+  --color-brand-lavender: #BDA6CE;
+  --color-brand-purple: #9B8EC7;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-cream text-[#2D2A2A] selection:bg-brand-lavender/30;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)];
+  }
+  
+  .glass-button {
+    @apply bg-white/60 backdrop-blur-md border border-white/60 hover:bg-white/80 transition-all duration-300;
+  }
+
+  .cute-shadow {
+    @apply shadow-[0_10px_40px_rgba(155,142,199,0.15)];
+  }
+}
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
