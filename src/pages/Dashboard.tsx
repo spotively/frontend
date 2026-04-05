@@ -191,7 +191,7 @@ export default function Dashboard() {
         </div>
 
         {/* Mobile Item List — overlaid on the background image */}
-        <div className="relative z-10 flex-1 flex flex-col justify-end px-6 pb-8 overflow-y-auto">
+        <div className="relative z-10 flex-1 flex flex-col px-6 pb-20 overflow-y-auto pt-4">
           {loading ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="w-10 h-10 border-4 border-white border-t-transparent animate-spin rounded-full"></div>
