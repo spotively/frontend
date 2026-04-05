@@ -24,29 +24,6 @@ interface TopResponse {
   items: PlaylistItem[];
 }
 
-const AutoScrollText = ({ text, className = '' }: { text: string; className?: string }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [isOverflowing, setIsOverflowing] = useState(false);
-
-  useEffect(() => {
-    if (containerRef.current && textRef.current) {
-      setIsOverflowing(textRef.current.offsetWidth > containerRef.current.clientWidth);
-    }
-  }, [text]);
-
-  return (
-    <div ref={containerRef} className={`overflow-hidden whitespace-nowrap w-full ${isOverflowing ? 'text-left' : 'text-right'}`}>
-      <div 
-        className={`inline-block ${className} ${isOverflowing ? 'animate-marquee' : ''}`}
-        style={{ paddingLeft: isOverflowing ? '100%' : '0' }}
-      >
-        <span ref={textRef}>{text}</span>
-      </div>
-    </div>
-  );
-};
-
 export default function Dashboard() {
   const [type, setType] = useState<TopType>('tracks');
   const [timeRange, setTimeRange] = useState<TimeRangeType>('medium_term');
